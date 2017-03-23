@@ -8,15 +8,21 @@ module HW_int
 			using DataFrames
 
 			function question_1b(n)
-				3*sum(gausslegendre(n)[2][i]*(1.5*gausslegendre(n)[1][i]+2.5)^(-0.5) for i=1:n)
+			gl = 3*sum(gausslegendre(n)[2][i]*(1.5*gausslegendre(n)[1][i]+2.5)^(-0.5) for i=1:n)
+		  println(gl)
+      return gl
 			end
+			question_1b(10)
 
 			function question_1c(n)
 				A = Float64[]
 					for i=1:n
-					push!(A, (1:4))
+					push!(A, 1+rand()*3)
 					end
-				3*(1/n)*sum(2*(A[i])^(-0.5) for i=1:n)
+			  MC=3*(1/n)*sum(2*(A[i])^(-0.5) for i=1:n)
+
+				println(MC)
+				return MC
 			end
 
 			function question_1d(n)
@@ -25,7 +31,9 @@ module HW_int
 					for i=1:n
 					push!(B, 1+(next(s))*3)
 					end
-				3*(2/n)*sum((B[i][1])^(-0.5) for i=1:n)
+				QMC=3*(2/n)*sum((B[i][1])^(-0.5) for i=1:n)
+        println(QMC)
+				return QMC
 			end
 
 			function question_2a(n)
@@ -46,7 +54,7 @@ module HW_int
 
 
 					# function to run all questions
-			function runall(n)
+			function runall(n=10)
 				println("running all questions of HW-integration:")
 				println("results of question 1")
 				q1b = question_1b(n)	# make sure your function prints some kind of result!
@@ -59,13 +67,12 @@ module HW_int
 				println("Question 1d")
 				println(q1d)
 				println("")
-				println("results of question 2 (expectation, variance):")
+				println("results of question 2 (expectation):")
 				q2 = question_2a(n)
 				println("Question 2a")
 				println(q2)
-				q2b = question_2b(n)
-				println("Question 2b")
-				println(q2b)
+		 		println("Question 2b")
+				println("Couldn't solve this question")
 				println("end of HW-integration")
 			end
 		end
